@@ -2,6 +2,8 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Pricing from "../components/Pricing";
 import Rewards from "../components/Rewards";
+import Challenge from "../components/Challenge";
+import Footer from "../components/Footer";
 
 const Home = () => {
   return (
@@ -29,6 +31,8 @@ const Home = () => {
       </p>
       <Pricing />
       <Rewards />
+      <Challenge />
+      <Footer />
     </div>
   );
 };

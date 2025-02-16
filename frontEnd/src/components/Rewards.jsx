@@ -5,7 +5,7 @@ const FitnessRewards = () => {
     <div className="bg-[#121416] relative min-h-screen flex flex-col items-center p-8 mt-[6vw]">
       {/* Heading */}
       <div className="text-center mb-12">
-        <h1 className="text-white text-4xl md:text-5xl font-dynapuff">
+        <h1 className="text-white text-4xl md:text-5xl font-bold font-dynapuff">
           Unlock Fitness Rewards
         </h1>
         <p className="text-gray-400 mt-2 text-lg">
