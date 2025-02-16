@@ -1,6 +1,5 @@
 import React from "react";
-import { GiRunningNinja } from "react-icons/gi";
-
+import { motion } from "framer-motion";
 const Challenge = () => {
   return (
     <div className="bg-[#1B1A1D] ">
@@ -19,16 +18,26 @@ const Challenge = () => {
             Claim Rewards
           </button>
         </div>
-        <div>
+        <motion.div
+          initial={{ y: 300, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
           <img
             src="https://cdn-imgs.dora.run/design/CuiHA53WkTUFjspowIOIyE.webp/w/4096/h/4096/format/webp?"
             alt="women with weights"
             className="w-[17vw] h-[30vw]"
           />
-        </div>
+        </motion.div>
       </div>
       <div className="flex">
-        <div className="w-[50%] px-[8vw] rounded-md flex flex-col gap-6 py-[6vw] bg-[#FAEFEC]">
+        {/* Left Card */}
+        <motion.div
+          initial={{ opacity: 0, x: -100, rotate: -10 }}
+          whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="w-[50%] px-[8vw] rounded-md flex flex-col gap-6 py-[6vw] bg-[#FAEFEC]"
+        >
           <h1 className="font-dynapuff text-4xl text-[#1C1A1C] font-bold">
             Fitness <br></br>Challenges
           </h1>
@@ -50,8 +59,15 @@ const Challenge = () => {
               <h2 className="text-[#9D9492]">Unlock Rewards</h2>
             </div>
           </div>
-        </div>
-        <div className="w-[50%] pr-[8vw] pl-[3vw] flex flex-col gap-6 pt-[8vw] pb-[6vw] ">
+        </motion.div>
+
+        {/* Right Card */}
+        <motion.div
+          initial={{ opacity: 0, x: 100, rotate: 10 }}
+          whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="w-[50%] pr-[8vw] pl-[3vw] flex flex-col gap-6 pt-[8vw] pb-[6vw]"
+        >
           <h1 className="font-dynapuff text-4xl text-white font-bold">
             Fitness <br></br>Challenges
           </h1>
@@ -69,7 +85,7 @@ const Challenge = () => {
               fitness
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

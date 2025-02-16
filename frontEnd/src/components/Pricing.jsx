@@ -1,4 +1,18 @@
 import React from "react";
+import { motion } from "framer-motion";
+
+const iconVariants = (duration) => ({
+  initial: { y: -10 },
+  animate: {
+    y: [10, -10],
+    transition: {
+      duration: duration,
+      ease: "linear",
+      repeat: Infinity,
+      repeatType: "reverse",
+    },
+  },
+});
 
 const Pricing = () => {
   const plans = [
@@ -22,7 +36,10 @@ const Pricing = () => {
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl">
           {plans.map((plan, index) => (
-            <div
+            <motion.div
+              variants={iconVariants(2.5)}
+              initial="intial"
+              animate="animate"
               key={index}
               className="bg-[#1C1E21] p-8 rounded-xl text-center shadow-lg"
             >
@@ -38,7 +55,7 @@ const Pricing = () => {
               <button className="mt-4 bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-600 transition">
                 Get Started
               </button>
-            </div>
+            </motion.div>
           ))}
           {/* Call to Action */}
           <div className="flex flex-col items-center">
