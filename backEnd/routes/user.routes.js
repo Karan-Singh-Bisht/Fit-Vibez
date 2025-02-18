@@ -6,7 +6,7 @@ const {
   logOut,
 } = require("../controllers/user.controller");
 const { body } = require("express-validator");
-const { verifyJwtToken } = require("../middleware/verifyJwtToken");
+const verifyJwtToken = require("../middleware/verifyJwtToken");
 
 router.post(
   "/register",

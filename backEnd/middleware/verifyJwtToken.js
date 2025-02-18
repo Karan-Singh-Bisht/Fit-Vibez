@@ -7,16 +7,16 @@ const verifyJwtToken = async (req, res, next) => {
     return res.status(401).json({ message: "Unauthorized" });
   }
 
-  const isBlackListed = BlackListToken.findOne({ token });
+  const isBlackListed = await BlackListToken.findOne({ token });
 
   if (isBlackListed) {
-    return res.status(401).json({ message: "Unauthorized" });
+    return res.status(401).json({ message: "Token BlackListed" });
   }
 
   try {
     jwt.verify(token, process.env.JWT_TOKEN, (err, user) => {
       if (err) {
-        if (err.name === "TokenExpired") {
+        if (err.name === "TokenExpiredError") {
           return res.status(401).json({ message: "Token Expired" });
         } else {
           return res.status(401).json({ message: "Invalid Token" });
@@ -26,8 +26,8 @@ const verifyJwtToken = async (req, res, next) => {
       next();
     });
   } catch (err) {
-    return res.status(401).json({ message: "Unauthorized" });
+    return res.status(500).json({ message: "Server Error" });
   }
 };
 
-module.exports = { verifyJwtToken };
+module.exports = verifyJwtToken;

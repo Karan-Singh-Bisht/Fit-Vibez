@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema({
   userName: {
@@ -10,7 +11,6 @@ const userSchema = new mongoose.Schema({
     },
     lastName: {
       type: String,
-      required: true,
       minlength: [2, "Last Name should be atleast 2 characters long"],
       maxlength: [50, "Max 50 characters allowed"],
     },
