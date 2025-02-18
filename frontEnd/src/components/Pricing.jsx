@@ -16,11 +16,11 @@ const iconVariants = (duration) => ({
 
 const Pricing = () => {
   const plans = [
-    { name: "Fatnçat", price: 5599 },
-    { name: "Wesbec;auzr", price: 5299 },
-    { name: "K&nIestin n ostanæ", price: 399 },
-    { name: "Fitnes: naumaný", price: 5399 },
-    { name: "SIOCCAIG", price: 5999 },
+    { name: "Fatnçat", price: 5599, value: 1 },
+    { name: "Wesbec;auzr", price: 5299, value: 1.5 },
+    { name: "K&nIestin n ostanæ", price: 399, value: 2 },
+    { name: "Fitnes: naumaný", price: 5399, value: 2.5 },
+    { name: "SIOCCAIG", price: 5999, value: 3 },
   ];
   return (
     <div>
@@ -37,7 +37,7 @@ const Pricing = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl">
           {plans.map((plan, index) => (
             <motion.div
-              variants={iconVariants(2.5)}
+              variants={iconVariants(plan.value)}
               initial="intial"
               animate="animate"
               key={index}
