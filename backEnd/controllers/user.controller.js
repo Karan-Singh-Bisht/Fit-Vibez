@@ -41,12 +41,17 @@ module.exports.registerUser = async (req, res) => {
     const { password: excluded, ...newUser } = user._doc;
     return res.status(201).json({ token, newUser });
   } catch (err) {
+    console.error(err);
     return res.status(500).json({ error: err });
   }
 };
 
 module.exports.loginUser = async (req, res) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array()[0].msg });
+    }
     const { email, password } = req.body;
     if (!email || !password) {
       return res.status(400).json({ message: "Please enter all fields" });
@@ -69,6 +74,7 @@ module.exports.loginUser = async (req, res) => {
     const { password: excluded, ...userDetails } = user._doc;
     return res.json({ token, userDetails });
   } catch (err) {
+    console.error(err);
     return res.status(500).json({ error: err });
   }
 };
