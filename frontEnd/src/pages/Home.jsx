@@ -6,11 +6,13 @@ import Challenge from "../components/Challenge";
 import Footer from "../components/Footer";
 import { motion } from "framer-motion";
 import Magnet from "../animations/Magnet";
+import AuthModal from "../modals/AuthModal";
 
 const Home = () => {
   return (
     <div className="w-full min-h-screen overflow-x-hidden bg-[#0F1112] relative">
       <Navbar />
+      <AuthModal />
       {/* Heading */}
       <motion.h1
         initial={{ y: -500, opacity: 0 }}
