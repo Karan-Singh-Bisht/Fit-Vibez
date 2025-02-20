@@ -24,6 +24,7 @@ const App = () => {
               <Route path="/pushup" element={<Pushup />}></Route>
               <Route path="/pullups" element={<Pullup />}></Route>
               <Route path="/jumpingJack" element={<JumpingJack />}></Route>
+              <Route path="/donate" element={<Home />}></Route>
             </Routes>
             <Toaster />
           </RainbowKitProvider>

@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 // import GlitchText from "./GlitchText";
 import GradientText from "./GradientText";
+import { useSelector } from "react-redux";
+import { toast } from "sonner";
 
 const iconVariants = (duration) => ({
   initial: { y: -10 },
@@ -18,7 +20,16 @@ const iconVariants = (duration) => ({
 });
 
 const Pricing = () => {
+  const authUser = useSelector((state) => state.userAuth);
   const navigate = useNavigate();
+
+  const handleNavigate = (to) => {
+    if (authUser.user) {
+      navigate(to);
+    } else {
+      toast.error("You need to be logged in to access this page.");
+    }
+  };
 
   const plans = [
     { name: "PushUp", price: 5599, value: 1, to: "/pushup" },
@@ -43,7 +54,7 @@ const Pricing = () => {
           colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
           animationSpeed={3}
         >
-          <h1 onClick={() => navigate("/donate")}>Donate</h1>
+          <h1 onClick={() => handleNavigate("donate")}>Donate</h1>
         </GradientText>
       </h2>
 
@@ -56,7 +67,7 @@ const Pricing = () => {
               initial="intial"
               animate="animate"
               key={index}
-              onClick={() => navigate(plan.to)}
+              onClick={() => handleNavigate(plan.to)}
               className="bg-[#1C1E21] p-8 rounded-xl text-center shadow-lg"
             >
               <div className="w-20 h-20 bg-red-500 rounded-full flex items-center justify-center mx-auto">
