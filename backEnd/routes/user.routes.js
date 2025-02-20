@@ -4,6 +4,7 @@ const {
   registerUser,
   loginUser,
   logOut,
+  getUserProfile,
 } = require("../controllers/user.controller");
 const { body } = require("express-validator");
 const verifyJwtToken = require("../middleware/verifyJwtToken");
@@ -34,5 +35,6 @@ router.post(
 );
 
 router.get("/logout", verifyJwtToken, logOut);
+router.get("/profile", verifyJwtToken, getUserProfile);
 
 module.exports = router;

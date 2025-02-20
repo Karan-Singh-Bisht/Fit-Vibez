@@ -53,6 +53,23 @@ export const logOut = createAsyncThunk(
   }
 );
 
+export const getUserProfile = createAsyncThunk(
+  "user/getUserProfile",
+  async (_, { rejectWithValue }) => {
+    try {
+      const token = Cookies.get("token");
+      const response = await axios.get(`${API_BASE_URL}/api/v1/user/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const userAuthSlice = createSlice({
   name: "userAuth",
   initialState: {
@@ -96,6 +113,19 @@ const userAuthSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(getUserProfile.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getUserProfile.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload.user;
+        state.error = null;
+      })
+      .addCase(getUserProfile.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
