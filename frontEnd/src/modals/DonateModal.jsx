@@ -31,7 +31,7 @@ export default function LoginModal() {
       address: import.meta.env.VITE_CONTRACT_ADDRESS,
       abi: ABI,
       functionName: "donation",
-      value: BigInt(ethers.parseEther("0.003")),
+      value: BigInt(ethers.parseEther(value.toString())),
     });
     // const userCredentials = { value };
     // const response = await dispatch(loginUser(userCredentials));
@@ -60,6 +60,7 @@ export default function LoginModal() {
             <input
               onChange={(e) => setValue(e.target.value)}
               type="number"
+              step="any"
               className="w-full p-2 rounded-md bg-gray-800 text-white outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
