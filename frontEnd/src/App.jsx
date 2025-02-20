@@ -6,6 +6,7 @@ import { Toaster } from "sonner";
 import Pushup from "./pages/Pushup";
 import Pullup from "./pages/Pullup";
 import JumpingJack from "./pages/JumpingJack";
+import Donate from "./pages/Donate";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/pushup" element={<Pushup />}></Route>
         <Route path="/pullups" element={<Pullup />}></Route>
         <Route path="/jumpingJack" element={<JumpingJack />}></Route>
+        <Route path="/donate" element={<Donate />}></Route>
       </Routes>
       <Toaster />
     </>

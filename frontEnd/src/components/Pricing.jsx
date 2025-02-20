@@ -1,6 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+// import GlitchText from "./GlitchText";
+import GradientText from "./GradientText";
 
 const iconVariants = (duration) => ({
   initial: { y: -10 },
@@ -30,11 +32,21 @@ const Pricing = () => {
       <h1 className="font-dynapuff text-white mt-[2vw] text-[3vw] font-semibold text-center">
         Join the Fitness Challenge
       </h1>
-      <p className="text-[#818180] mt-[1vw] font-inter text-center">
+      <h2 className="text-[#818180] mt-[1vw] font-inter text-center">
         Unlock Cash Rewards for Completing Fitness Challenges. Track Your
         Progress, Compete with <br></br> Friends, and Earn Exciting Prizes as
         You Achieve Your Fitness Goals
-      </p>
+      </h2>
+      <h2 className="text-[#818180] mt-[1vw] font-inter text-center gap-2">
+        Help us to keep the gains coming—both in reps and in funds!
+        <GradientText
+          colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
+          animationSpeed={3}
+        >
+          <h1 onClick={() => navigate("/donate")}>Donate</h1>
+        </GradientText>
+      </h2>
+
       <div className="bg-[#0F1112] min-h-screen flex flex-col items-center justify-center p-8">
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl">

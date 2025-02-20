@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { getUserProfile } from "../state/Auth/userAuthSlice";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import ScrollVelocity from "../components/ScrollVelocity";
 
 const Home = () => {
   const dispatch = useDispatch();
