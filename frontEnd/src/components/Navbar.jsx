@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import { FaPaperPlane, FaBars, FaTimes } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import "@rainbow-me/rainbowkit/styles.css";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { WagmiProvider } from "wagmi";
-import { config } from "../config/config";
-import { darkTheme, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+// import "@rainbow-me/rainbowkit/styles.css";
 import WalletBtn from "./ConnectWallet";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../state/Auth/userAuthSlice";
 import { toast } from "sonner";
 
-const client = new QueryClient();
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,9 +34,7 @@ const Navbar = () => {
   ];
 
   return (
-    <QueryClientProvider client={client}>
-      <WagmiProvider config={config}>
-        <RainbowKitProvider theme={darkTheme()}>
+    
           <div className="w-full bg-[#0D0E0F] py-3 px-[8vw]">
             <div className="flex justify-between items-center">
               {/* Logo */}
@@ -110,9 +103,7 @@ const Navbar = () => {
               </div>
             )}
           </div>
-        </RainbowKitProvider>
-      </WagmiProvider>
-    </QueryClientProvider>
+     
   );
 };
 
