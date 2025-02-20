@@ -68,7 +68,7 @@ const Navbar = () => {
                   <div className="flex gap-4">
                     <WalletBtn />
                     <button
-                      className="text-black bg-red-500 text-sm px-4 py-2 ml-4 hover:text-white transition"
+                      className="text-black bg-red-500 rounded-lg text-sm px-4 py-2 ml-2 hover:text-white transition"
                       onClick={handleLogout}
                     >
                       Logout

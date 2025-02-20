@@ -1,14 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Pricing from "../components/Pricing";
 import Rewards from "../components/Rewards";
 import Challenge from "../components/Challenge";
 import Footer from "../components/Footer";
 import { motion } from "framer-motion";
-import Magnet from "../animations/Magnet";
 import AuthModal from "../modals/AuthModal";
+import { useDispatch } from "react-redux";
+import { getUserProfile } from "../state/Auth/userAuthSlice";
+import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const token = Cookies.get("token");
+
+  useEffect(() => {
+    const getUser = async () => {
+      const result = await dispatch(getUserProfile());
+      if (result.meta.requestStatus === "fulfilled") {
+        navigate("/");
+      }
+    };
+    getUser();
+  }, [token, dispatch, navigate]);
+
   return (
     <div className="w-full min-h-screen overflow-x-hidden bg-[#0F1112] relative">
       <Navbar />

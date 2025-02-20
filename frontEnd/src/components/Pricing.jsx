@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const iconVariants = (duration) => ({
   initial: { y: -10 },
@@ -15,12 +16,14 @@ const iconVariants = (duration) => ({
 });
 
 const Pricing = () => {
+  const navigate = useNavigate();
+
   const plans = [
-    { name: "Fatnçat", price: 5599, value: 1 },
-    { name: "Wesbec;auzr", price: 5299, value: 1.5 },
-    { name: "K&nIestin n ostanæ", price: 399, value: 2 },
-    { name: "Fitnes: naumaný", price: 5399, value: 2.5 },
-    { name: "SIOCCAIG", price: 5999, value: 3 },
+    { name: "PushUp", price: 5599, value: 1, to: "/pushup" },
+    { name: "Jumping Jack", price: 5299, value: 1.5, to: "/jumpingjack" },
+    { name: "Pull Ups", price: 399, value: 2, to: "/pullups" },
+    // { name: "Fitnes: naumaný", price: 5399, value: 2.5 },
+    // { name: "SIOCCAIG", price: 5999, value: 3 },
   ];
   return (
     <div>
@@ -41,6 +44,7 @@ const Pricing = () => {
               initial="intial"
               animate="animate"
               key={index}
+              onClick={() => navigate(plan.to)}
               className="bg-[#1C1E21] p-8 rounded-xl text-center shadow-lg"
             >
               <div className="w-20 h-20 bg-red-500 rounded-full flex items-center justify-center mx-auto">
@@ -57,16 +61,16 @@ const Pricing = () => {
               </button>
             </motion.div>
           ))}
-          {/* Call to Action */}
-          <div className="flex flex-col items-center">
-            <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto">
-              <span className="text-white text-2xl">🏃‍♂️</span>
-            </div>
-            <h2 className="text-white text-3xl font-bold mt-4">Start Now</h2>
-            <p className="text-white text-4xl font-extrabold mt-2">Earn</p>
-            <p className="text-red-400 font-medium mt-2">Get Fit, Get Paid</p>
-            <p className="text-gray-400 text-sm">Achieve Your Fitness Goals</p>
+        </div>
+        {/* Call to Action */}
+        <div className="flex flex-col mt-[5vw] items-center">
+          <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto">
+            <span className="text-white text-2xl">🏃‍♂️</span>
           </div>
+          <h2 className="text-white text-3xl font-bold mt-4">Start Now</h2>
+          <p className="text-white text-4xl font-extrabold mt-2">Earn</p>
+          <p className="text-red-400 font-medium mt-2">Get Fit, Get Paid</p>
+          <p className="text-gray-400 text-sm">Achieve Your Fitness Goals</p>
         </div>
       </div>
       <hr className="text-[#899093]"></hr>
