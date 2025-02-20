@@ -1,6 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+// import GlitchText from "./GlitchText";
+import GradientText from "./GradientText";
+import { useSelector } from "react-redux";
+import { toast } from "sonner";
 
 const iconVariants = (duration) => ({
   initial: { y: -10 },
@@ -16,7 +20,16 @@ const iconVariants = (duration) => ({
 });
 
 const Pricing = () => {
+  const authUser = useSelector((state) => state.userAuth);
   const navigate = useNavigate();
+
+  const handleNavigate = (to) => {
+    if (authUser.user) {
+      navigate(to);
+    } else {
+      toast.error("You need to be logged in to access this page.");
+    }
+  };
 
   const plans = [
     { name: "PushUp", price: 5599, value: 1, to: "/pushup" },
@@ -30,11 +43,21 @@ const Pricing = () => {
       <h1 className="font-dynapuff text-white mt-[2vw] text-[3vw] font-semibold text-center">
         Join the Fitness Challenge
       </h1>
-      <p className="text-[#818180] mt-[1vw] font-inter text-center">
+      <h2 className="text-[#818180] mt-[1vw] font-inter text-center">
         Unlock Cash Rewards for Completing Fitness Challenges. Track Your
         Progress, Compete with <br></br> Friends, and Earn Exciting Prizes as
         You Achieve Your Fitness Goals
-      </p>
+      </h2>
+      <h2 className="text-[#818180] mt-[1vw] font-inter text-center gap-2">
+        Help us to keep the gains coming—both in reps and in funds!
+        <GradientText
+          colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
+          animationSpeed={3}
+        >
+          <h1 onClick={() => handleNavigate("donate")}>Donate</h1>
+        </GradientText>
+      </h2>
+
       <div className="bg-[#0F1112] min-h-screen flex flex-col items-center justify-center p-8">
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl">
@@ -44,7 +67,7 @@ const Pricing = () => {
               initial="intial"
               animate="animate"
               key={index}
-              onClick={() => navigate(plan.to)}
+              onClick={() => handleNavigate(plan.to)}
               className="bg-[#1C1E21] p-8 rounded-xl text-center shadow-lg"
             >
               <div className="w-20 h-20 bg-red-500 rounded-full flex items-center justify-center mx-auto">

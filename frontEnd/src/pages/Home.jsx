@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { getUserProfile } from "../state/Auth/userAuthSlice";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import ScrollVelocity from "../components/ScrollVelocity";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -19,9 +20,9 @@ const Home = () => {
   useEffect(() => {
     const getUser = async () => {
       const result = await dispatch(getUserProfile());
-      if (result.meta.requestStatus === "fulfilled") {
-        navigate("/");
-      }
+      // if (result.meta.requestStatus === "fulfilled") {
+      //   navigate("/");
+      // }
     };
     getUser();
   }, [token, dispatch, navigate]);
@@ -56,8 +57,8 @@ const Home = () => {
       <motion.p
         className="text-[3vw] sm:text-[2.5vw] md:text-[1.1vw] font-semibold text-[#899093] absolute top-[25vw] left-[8vw] leading-6 sm:leading-7"
         animate={{
-          x: [1, -5, 5, -7], // Moves slightly left & right
-          y: [1, -3, 3, 7], // Moves slightly up & down
+          x: [0, -20, -30, 0], // Moves slightly left & right
+          y: [0, -10, -10, 0], // Moves slightly up & down
         }}
         transition={{
           duration: 3, // Adjust the speed
