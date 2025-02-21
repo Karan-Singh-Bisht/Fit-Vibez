@@ -3,6 +3,9 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "../state/Auth/userAuthSlice"; // Assuming correct action
 import { Toaster, toast } from "sonner";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useAccount, useWriteContract } from "wagmi";
+import { ABI } from "../Abi/abi";
+import { ethers } from "ethers";
 
 export default function LoginModal() {
   const [value, setValue] = useState(0);
@@ -10,7 +13,7 @@ export default function LoginModal() {
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
-
+  const { data: hash, writeContract } = useWriteContract();
   useEffect(() => {
     if (location.pathname === "/donate") {
       setOpen(true);
@@ -24,7 +27,13 @@ export default function LoginModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userCredentials = { value };
+    writeContract({
+      address: import.meta.env.VITE_CONTRACT_ADDRESS,
+      abi: ABI,
+      functionName: "donation",
+      value: BigInt(ethers.parseEther(value.toString())),
+    });
+    // const userCredentials = { value };
     // const response = await dispatch(loginUser(userCredentials));
 
     // if (response.meta.requestStatus === "fulfilled") {
@@ -51,6 +60,7 @@ export default function LoginModal() {
             <input
               onChange={(e) => setValue(e.target.value)}
               type="number"
+              step="any"
               className="w-full p-2 rounded-md bg-gray-800 text-white outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
