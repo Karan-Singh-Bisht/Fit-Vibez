@@ -5,6 +5,12 @@ import { useNavigate } from "react-router-dom";
 import GradientText from "./GradientText";
 import { useSelector } from "react-redux";
 import { toast } from "sonner";
+import {Canvas} from "@react-three/fiber"
+import {OrbitControls} from "@react-three/drei"
+import Model1 from "./Model1";
+import Model2 from "./Model2";
+import Model3 from "./Model3";
+
 
 const iconVariants = (duration) => ({
   initial: { y: -10 },
@@ -32,9 +38,9 @@ const Pricing = () => {
   };
 
   const plans = [
-    { name: "PushUp", price: 5599, value: 1, to: "/pushup" },
-    { name: "Jumping Jack", price: 5299, value: 1.5, to: "/jumpingjack" },
-    { name: "Pull Ups", price: 399, value: 2, to: "/pullups" },
+    { name: "Jumping Jack", price: 5599, value: 1, to: "/pushup" , model: <Model1 position={[0,-2.7,0]} scale={1.6} animationName = "Armature|mixamo.com|Layer0"/> },
+    { name: "Squats", price: 5299, value: 1.5, to: "/jumpingjack" , model: <Model2 position={[0,-2.7,0]} scale={1.6} animationName = "Armature|mixamo.com|Layer0"/>},
+    { name: "Bicep Curls", price: 399, value: 2, to: "/pullups" , model: <Model3 position={[0,-2.7,0]} scale={1.6} animationName = "Armature|mixamo.com|Layer0"/> },
     // { name: "Fitnes: naumaný", price: 5399, value: 2.5 },
     // { name: "SIOCCAIG", price: 5999, value: 3 },
   ];
@@ -68,10 +74,22 @@ const Pricing = () => {
               animate="animate"
               key={index}
               onClick={() => handleNavigate(plan.to)}
-              className="bg-[#1C1E21] p-8 rounded-xl text-center shadow-lg"
+              className="bg-[#1C1E21] p-8 rounded-xl text-center shadow-lg h-[36vw]"
             >
-              <div className="w-20 h-20 bg-red-500 rounded-full flex items-center justify-center mx-auto">
-                <span className="text-white text-3xl">S</span>
+              <div className="w-50 h-72 bg-gray-600 rounded-3xl flex items-center justify-center mx-auto">
+                {/* <span className="text-white text-3xl">S</span> */}
+                <Canvas>
+                  <ambientLight intensity={1} />
+                  <directionalLight position={[3, 2, 1]} />
+                  
+                  {plan.model}
+
+                  <OrbitControls 
+                    minPolarAngle={Math.PI / 2}
+                    enableZoom={false}
+                    maxPolarANgle={Math.PI / 2}
+                  />
+                </Canvas>
               </div>
               <h2 className="text-white text-2xl font-bold mt-4">
                 {plan.name}
