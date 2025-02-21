@@ -37,7 +37,7 @@ const Pricing = () => {
       </p>
       <div className="bg-[#0F1112] min-h-screen flex flex-col items-center justify-center p-8">
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl">
+        <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-8  max-w-6xl">
           {plans.map((plan, index) => (
             <motion.div
               variants={iconVariants(plan.value)}
@@ -47,16 +47,17 @@ const Pricing = () => {
               onClick={() => navigate(plan.to)}
               className="bg-[#1C1E21] p-8 rounded-xl text-center shadow-lg"
             >
-              <div className="w-20 h-20 bg-red-500 rounded-full flex items-center justify-center mx-auto">
+              <div className="w-20 h-20 bg-red-500 rounded-3xl flex items-center justify-center mx-auto">
                 <span className="text-white text-3xl">S</span>
+                
               </div>
-              <h2 className="text-white text-2xl font-bold mt-4">
+              <h2 className="text-white text-1xl font-bold mt-2">
                 {plan.name}
               </h2>
-              <p className="text-white text-4xl font-extrabold mt-2">
+              <p className="text-white text-2xl font-extrabold mt-2">
                 ${plan.price}
               </p>
-              <button className="mt-4 bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-600 transition">
+              <button className="mt-2 bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-600 transition">
                 Get Started
               </button>
             </motion.div>
