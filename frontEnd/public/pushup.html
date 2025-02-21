@@ -4,14 +4,97 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pose Detection</title>
+    <style>
+      /* General Styling */
+      body {
+        font-family: "Arial", sans-serif;
+        text-align: center;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        margin-top: 20px;
+        color: #333;
+      }
+
+      /* Video Styling */
+      .video-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 60vh;
+      }
+
+      video {
+        width: 80%;
+        max-width: 600px;
+        border-radius: 10px;
+        border: 4px solid #007bff;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Count Display */
+      .counter {
+        font-size: 24px;
+        font-weight: bold;
+        color: #007bff;
+        margin-top: 10px;
+      }
+
+      /* Final Message */
+      #finalMessage {
+        display: none;
+        font-size: 20px;
+        font-weight: bold;
+        color: red;
+        margin-top: 10px;
+        animation: fadeIn 1s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Button Styling */
+      .restart-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: white;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background 0.3s ease-in-out;
+      }
+
+      .restart-button:hover {
+        background-color: #0056b3;
+      }
+    </style>
   </head>
   <body>
     <h1>Real-time Pose Detection</h1>
-    <video id="video" autoplay></video>
-    <p>Count: <span id="count">0</span></p>
-    <p id="finalMessage" style="display: none; color: red">
+
+    <div class="video-container">
+      <video id="video" autoplay></video>
+    </div>
+
+    <p class="counter">Count: <span id="count">0</span></p>
+
+    <p id="finalMessage">
       Session Ended. Final Count: <span id="finalCount"></span>
     </p>
+
+    <button class="restart-button" onclick="restartSession()">Restart</button>
 
     <script>
       const video = document.getElementById("video");
@@ -25,9 +108,9 @@
 
       async function sendFrame() {
         frameCount++;
-        if (frameCount % frameSkip !== 0) return; // Skip some frames for optimization
+        if (frameCount % frameSkip !== 0) return;
 
-        const canvas = document.createElement("canvas"); // Create an off-screen canvas
+        const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d");
         canvas.width = 320;
         canvas.height = 240;
@@ -47,9 +130,15 @@
           const data = await response.json();
           countDisplay.innerText = data.count;
 
+          // ✅ Send data to React
+          window.parent.postMessage(
+            { count: data.count, final: data.final },
+            "*"
+          );
+
           if (data.final) {
-            clearInterval(intervalId); // Stop sending frames
-            video.srcObject.getTracks().forEach((track) => track.stop()); // Stop webcam
+            clearInterval(intervalId);
+            video.srcObject.getTracks().forEach((track) => track.stop());
             finalMessage.style.display = "block";
             finalCountDisplay.innerText = data.count;
           }
@@ -58,15 +147,13 @@
         }
       }
 
-      // Start camera and process frames
       navigator.mediaDevices
         .getUserMedia({ video: { width: 640, height: 480 } })
         .then((stream) => {
           video.srcObject = stream;
-          intervalId = setInterval(sendFrame, 100); // Send frames every 100ms
+          intervalId = setInterval(sendFrame, 100);
         });
 
-      // Reset session on page load
       window.onload = async () => {
         try {
           await fetch(
@@ -78,6 +165,10 @@
           console.error("Error resetting session:", error);
         }
       };
+
+      function restartSession() {
+        window.location.reload();
+      }
     </script>
   </body>
 </html>

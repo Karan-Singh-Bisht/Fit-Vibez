@@ -1,6 +1,25 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useAccount, useWriteContract } from "wagmi";
+import { ABI } from "../ABI/abi";
+import { toast } from "sonner";
+
 const Challenge = () => {
+  const { address, isConnected } = useAccount();
+  const { data: hash, writeContract } = useWriteContract();
+
+  const handleClaim = () => {
+    if (!isConnected) {
+      toast.error("Please Connect your wallet");
+      return;
+    }
+    return writeContract({
+      address: import.meta.env.VITE_CONTRACT_ADDRESS,
+      abi: ABI,
+      functionName: "claim",
+    });
+  };
+
   return (
     <div className="bg-[#1B1A1D] ">
       <div className="flex gap-[19vw] px-[10vw] pt-[8vw]">
@@ -14,7 +33,10 @@ const Challenge = () => {
             <br /> and Start Transforming Your Body and Bank Account
             <br /> Today
           </p>
-          <button className="text-white mt-6 w-[10vw] text-md p-2 bg-[#F04658] opacity-80 rounded-full">
+          <button
+            onClick={handleClaim}
+            className="text-white mt-6 w-[10vw] text-md p-2 bg-[#F04658] opacity-80 rounded-full"
+          >
             Claim Rewards
           </button>
         </div>
