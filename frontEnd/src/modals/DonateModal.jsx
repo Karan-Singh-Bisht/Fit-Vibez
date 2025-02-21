@@ -4,7 +4,7 @@ import { loginUser } from "../state/Auth/userAuthSlice"; // Assuming correct act
 import { Toaster, toast } from "sonner";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAccount, useWriteContract } from "wagmi";
-import { ABI } from "../Abi/abi";
+import { ABI } from "../ABI/abi";
 import { ethers } from "ethers";
 
 export default function LoginModal() {
