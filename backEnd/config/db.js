@@ -5,6 +5,7 @@ const db = async () => {
     await mongoose.connect(`${process.env.MONGODB_URI}/fitVibez`);
     console.log("Connected to MongoDB");
   } catch (err) {
+    console.log(err);
     console.log("Couldn't connect to MongoDB");
     process.exit(1);
   }

@@ -4,7 +4,7 @@ import { loginUser } from "../state/Auth/userAuthSlice"; // Assuming correct act
 import { Toaster, toast } from "sonner";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAccount, useWriteContract } from "wagmi";
-import { ABI } from "../Abi/abi";
+import { ABI } from "../ABI/abi";
 import { ethers } from "ethers";
 
 export default function LoginModal() {
@@ -33,17 +33,6 @@ export default function LoginModal() {
       functionName: "donation",
       value: BigInt(ethers.parseEther(value.toString())),
     });
-    // const userCredentials = { value };
-    // const response = await dispatch(loginUser(userCredentials));
-
-    // if (response.meta.requestStatus === "fulfilled") {
-    //   toast.success(
-    //     `Welcome, ${response.payload.userDetails.userName.firstName}`
-    //   );
-    //   handleClose();
-    // } else {
-    //   toast.error(response.payload.message);
-    // }
   };
 
   if (!open) return null;
