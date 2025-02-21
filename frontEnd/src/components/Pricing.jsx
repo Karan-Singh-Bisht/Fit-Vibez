@@ -1,6 +1,18 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { Canvas } from "@react-three/fiber";
+// import CardModel from "./CardModel";
+// import Man2 from "./Man2";
+import Man from "../components/man";
+import Man2 from "./Man2";
+import Man3 from "./Man3";
+import { OrbitControls } from "@react-three/drei";
+// import Female1 from "../components/Female1";
+// console.log('Pricing component rendered');
+// console.log('Plans:', plans);
+// console.log('Navigate function:', navigate);
+
 
 const iconVariants = (duration) => ({
   initial: { y: -10 },
@@ -19,9 +31,9 @@ const Pricing = () => {
   const navigate = useNavigate();
 
   const plans = [
-    { name: "PushUp", price: 5599, value: 1, to: "/pushup" },
-    { name: "Jumping Jack", price: 5299, value: 1.5, to: "/jumpingjack" },
-    { name: "Pull Ups", price: 399, value: 2, to: "/pullups" },
+    { name: "Squats", price: 5599, value: 1, to: "/pushup" , modelName: <Man2 position={[0, -2.6, 0]} scale={1.5} animationName="Armature|mixamo.com|Layer0"/> , },
+    { name: "Jumping Jack", price: 5299, value: 1.5, to: "/jumpingjack" , modelName: <Man position={[0, -3, 0]} scale={1.5} animationName="Armature|mixamo.com|Layer0"/>},
+    { name: "BicepCurls", price: 399, value: 2, to: "/pullups" , modelName: <Man3 position={[0, -2.6, 0]} scale={1.5} animationName="Armature|mixamo.com|Layer0" />},
     // { name: "Fitnes: naumaný", price: 5399, value: 2.5 },
     // { name: "SIOCCAIG", price: 5999, value: 3 },
   ];
@@ -45,10 +57,20 @@ const Pricing = () => {
               animate="animate"
               key={index}
               onClick={() => navigate(plan.to)}
-              className="bg-[#1C1E21] p-8 rounded-xl text-center shadow-lg"
+              className="bg-[#1C1E21] p-8 rounded-xl text-center shadow-lg h-[35vw]"
             >
-              <div className="w-20 h-20 bg-red-500 rounded-3xl flex items-center justify-center mx-auto">
-                <span className="text-white text-3xl">S</span>
+              <div className="w-30 h-72  rounded-3xl flex items-center justify-center mx-auto">
+                {/* <span className="text-white text-3xl">S</span> */}
+                <Canvas className="bg-slate-800 rounded-xl">
+                  <ambientLight intensity={1} />
+                  <directionalLight position={[3, 2, 1]} /> 
+                  {plan.modelName}
+                  <OrbitControls 
+                    enableZoom={false}
+                    maxPolarAngle={Math.PI / 2}
+                    minPolarAngle={Math.PI / 2}
+                  />
+                </Canvas>
                 
               </div>
               <h2 className="text-white text-1xl font-bold mt-2">
