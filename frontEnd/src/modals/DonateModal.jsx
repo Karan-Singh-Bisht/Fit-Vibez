@@ -13,7 +13,8 @@ export default function LoginModal() {
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const { data: hash, writeContract } = useWriteContract();
+  const { data: hash, writeContractAsync } = useWriteContract();
+  const { address, isConnected } = useAccount();
   useEffect(() => {
     if (location.pathname === "/donate") {
       setOpen(true);
@@ -26,13 +27,19 @@ export default function LoginModal() {
   };
 
   const handleSubmit = async (e) => {
+    if (!isConnected) {
+      toast.error("Connect wallet first");
+      return;
+    }
     e.preventDefault();
-    writeContract({
+    writeContractAsync({
       address: import.meta.env.VITE_CONTRACT_ADDRESS,
       abi: ABI,
       functionName: "donation",
       value: BigInt(ethers.parseEther(value.toString())),
     });
+    toast.success(`Thank you for donating ${value} eth`);
+    handleClose();
   };
 
   if (!open) return null;

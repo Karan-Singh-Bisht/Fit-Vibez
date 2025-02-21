@@ -26,7 +26,7 @@ const App = () => {
               <Route path="/jumpingJack" element={<JumpingJack />}></Route>
               <Route path="/donate" element={<Home />}></Route>
             </Routes>
-            <Toaster />
+            <Toaster richColors />
           </RainbowKitProvider>
         </WagmiProvider>
       </QueryClientProvider>
