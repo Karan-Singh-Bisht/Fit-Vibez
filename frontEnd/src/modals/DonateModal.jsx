@@ -33,17 +33,6 @@ export default function LoginModal() {
       functionName: "donation",
       value: BigInt(ethers.parseEther(value.toString())),
     });
-    // const userCredentials = { value };
-    // const response = await dispatch(loginUser(userCredentials));
-
-    // if (response.meta.requestStatus === "fulfilled") {
-    //   toast.success(
-    //     `Welcome, ${response.payload.userDetails.userName.firstName}`
-    //   );
-    //   handleClose();
-    // } else {
-    //   toast.error(response.payload.message);
-    // }
   };
 
   if (!open) return null;

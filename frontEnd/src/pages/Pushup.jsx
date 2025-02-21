@@ -12,7 +12,7 @@ const PoseDetection = () => {
     const startCamera = async () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: { width: 640, height: 480 },
+          video: { width: 640, height: 480, facingMode: "user" },
         });
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
