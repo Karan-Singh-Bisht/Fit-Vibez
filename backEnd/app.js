@@ -13,8 +13,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 const userRoutes = require("./routes/user.routes");
+const trackRoute = require("./routes/track.routes");
 
 app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/track", trackRoute);
 
 const PORT = process.env.PORT || 3000;
 
