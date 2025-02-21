@@ -38,9 +38,9 @@ const Pricing = () => {
   };
 
   const plans = [
-    { name: "Jumping Jack", price: 5599, value: 1, to: "/pushup" , model: <Model1 position={[0,-2.7,0]} scale={1.6}/> },
-    { name: "Squats", price: 5299, value: 1.5, to: "/jumpingjack" , model: <Model2 position={[0,-2.7,0]} scale={1.6}/>},
-    { name: "Bicep Curls", price: 399, value: 2, to: "/pullups" , model: <Model3 position={[0,-2.7,0]} scale={1.6}/>},
+    { name: "Jumping Jack", price: 5599, value: 1, to: "/pushup" , model: <Model1 position={[0,-2.7,0]} scale={1.6} animationName = "Armature|mixamo.com|Layer0"/> },
+    { name: "Squats", price: 5299, value: 1.5, to: "/jumpingjack" , model: <Model2 position={[0,-2.7,0]} scale={1.6} animationName = "Armature|mixamo.com|Layer0"/>},
+    { name: "Bicep Curls", price: 399, value: 2, to: "/pullups" , model: <Model3 position={[0,-2.7,0]} scale={1.6} animationName = "Armature|mixamo.com|Layer0"/> },
     // { name: "Fitnes: naumaný", price: 5399, value: 2.5 },
     // { name: "SIOCCAIG", price: 5999, value: 3 },
   ];
