@@ -44,18 +44,18 @@ const contract = new ethers.Contract(
 );
 
 export const pushUpTracker = async (req, res) => {
-  const { userAddress, pushupCount } = req.body;
+  const { userAddress, pushUpCount } = req.body;
 
-  if (!userAddress || pushupCount === undefined) {
+  if (!userAddress || pushUpCount === undefined) {
     return res
       .status(400)
       .json({ error: "User address and push-up count are required" });
   }
 
-  if (pushupCount >= 10) {
+  if (pushUpCount >= 10) {
     try {
       console.log(
-        `🎯 User ${userAddress} completed ${pushupCount} push-ups. Rewarding now...`
+        `🎯 User ${userAddress} completed ${pushUpCount} push-ups. Rewarding now...`
       );
 
       // *Step 1: Mark goal as completed*
@@ -64,7 +64,7 @@ export const pushUpTracker = async (req, res) => {
       console.log(`✅ Goal completion set for ${userAddress}: ${tx1.hash}`);
 
       // *Step 2: Assign reward*
-      const rewardAmount = ethers.parseUnits("0.00000000000000000001", "ether"); // Converts 0.001 ETH to Wei
+      const rewardAmount = ethers.parseUnits("0.01", "ether"); // Correctly converts to 100000000000000 Wei
       const tx2 = await contract.setRewards(userAddress, rewardAmount);
       await tx2.wait();
       console.log(
@@ -78,7 +78,7 @@ export const pushUpTracker = async (req, res) => {
     }
   } else {
     return res.json({
-      message: ` User has only completed ${pushupCount} push-ups. Keep going! `,
+      message: ` User has only completed ${pushUpCount} push-ups. Keep going! `,
     });
   }
 };
