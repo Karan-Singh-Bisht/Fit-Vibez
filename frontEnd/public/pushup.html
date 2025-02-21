@@ -33,6 +33,7 @@
         border-radius: 10px;
         border: 4px solid #007bff;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        display: none; /* Initially hidden */
       }
 
       /* Count Display */
@@ -63,7 +64,7 @@
       }
 
       /* Button Styling */
-      .restart-button {
+      .button {
         display: inline-block;
         padding: 10px 20px;
         font-size: 16px;
@@ -72,12 +73,20 @@
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        margin-top: 20px;
+        margin-top: 10px;
         transition: background 0.3s ease-in-out;
       }
 
-      .restart-button:hover {
+      .button:hover {
         background-color: #0056b3;
+      }
+
+      .stop-button {
+        background-color: #dc3545;
+      }
+
+      .stop-button:hover {
+        background-color: #a71d2a;
       }
     </style>
   </head>
@@ -94,16 +103,29 @@
       Session Ended. Final Count: <span id="finalCount"></span>
     </p>
 
-    <button class="restart-button" onclick="restartSession()">Restart</button>
+    <button class="button" id="startButton" onclick="startSession()">
+      Start
+    </button>
+    <button
+      class="button stop-button"
+      id="stopButton"
+      onclick="stopSession()"
+      disabled
+    >
+      Stop
+    </button>
 
     <script>
       const video = document.getElementById("video");
       const countDisplay = document.getElementById("count");
       const finalMessage = document.getElementById("finalMessage");
       const finalCountDisplay = document.getElementById("finalCount");
+      const startButton = document.getElementById("startButton");
+      const stopButton = document.getElementById("stopButton");
 
       let intervalId;
       let frameCount = 0;
+      let stream = null;
       const frameSkip = 5; // Send every 5th frame to reduce load
 
       async function sendFrame() {
@@ -119,7 +141,7 @@
 
         try {
           const response = await fetch(
-            "https://pushup-poseestimation-2.onrender.com/process_frame/",
+            "https://pushups-8vy9.onrender.com/process_frame/",
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -137,8 +159,7 @@
           );
 
           if (data.final) {
-            clearInterval(intervalId);
-            video.srcObject.getTracks().forEach((track) => track.stop());
+            stopSession();
             finalMessage.style.display = "block";
             finalCountDisplay.innerText = data.count;
           }
@@ -147,27 +168,47 @@
         }
       }
 
-      navigator.mediaDevices
-        .getUserMedia({ video: { width: 640, height: 480 } })
-        .then((stream) => {
-          video.srcObject = stream;
-          intervalId = setInterval(sendFrame, 100);
-        });
-
-      window.onload = async () => {
+      async function startSession() {
         try {
-          await fetch(
-            "https://pushup-poseestimation-2.onrender.com/reset_session/",
-            { method: "POST" }
-          );
+          stream = await navigator.mediaDevices.getUserMedia({
+            video: { width: 640, height: 480 },
+          });
+
+          video.srcObject = stream;
+          video.style.display = "block";
+          intervalId = setInterval(sendFrame, 100);
+
+          // Enable Stop button, disable Start button
+          startButton.disabled = true;
+          stopButton.disabled = false;
+
+          // Reset session in backend
+          await fetch("https://pushups-8vy9.onrender.com//reset_session/", {
+            method: "POST",
+          });
           console.log("Session reset successfully");
         } catch (error) {
-          console.error("Error resetting session:", error);
+          console.error("Error starting session:", error);
         }
-      };
+      }
 
-      function restartSession() {
-        window.location.reload();
+      function stopSession() {
+        if (stream) {
+          stream.getTracks().forEach((track) => track.stop());
+          video.srcObject = null;
+          video.style.display = "none";
+          clearInterval(intervalId);
+
+          // Send stop event to React page
+          window.parent.postMessage(
+            { action: "stop", finalCount: Number(countDisplay.innerText) },
+            "*"
+          );
+        }
+
+        // Enable Start button, disable Stop button
+        startButton.disabled = false;
+        stopButton.disabled = true;
       }
     </script>
   </body>
