@@ -7,7 +7,6 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
 const Challenge = () => {
-  const claimRef = useRef(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -45,13 +44,6 @@ const Challenge = () => {
             <br /> and Start Transforming Your Body and Bank Account
             <br /> Today
           </p>
-          <button
-            id="claim"
-            onClick={handleClaim}
-            className="text-white mt-6 w-[10vw] text-md p-2 bg-[#F04658] opacity-80 rounded-full"
-          >
-            Claim Rewards
-          </button>
         </div>
         <motion.div
           initial={{ y: 300, opacity: 0 }}
@@ -59,7 +51,7 @@ const Challenge = () => {
           transition={{ duration: 1 }}
         >
           <img
-            src = "/imgNew.png"
+            src="/imgNew.png"
             // src="https://cdn-imgs.dora.run/design/CuiHA53WkTUFjspowIOIyE.webp/w/4096/h/4096/format/webp?"
             alt="women with weights"
             className="w-[30vw] shadow-lg hover:shadow-gray-950 rounded-full h-[30vw]"

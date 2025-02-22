@@ -51,10 +51,11 @@ const Pushup = () => {
           setCount(0);
           setSessionEnded(false);
           if (res.status === 200) {
-            navigate("/home");
+            navigate("/");
           }
         } catch (error) {
           console.error("Error tracking push-ups:", error);
+          toast.error("Error tracking push-ups. Please try again.");
         }
       }
     };

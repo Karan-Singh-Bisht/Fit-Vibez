@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { pushUpTracker, setFinalActivityCount } from "../state/Ai/AiSlice";
+import { squatTracker, setFinalActivityCount } from "../state/Ai/AiSlice";
 import { useAccount } from "wagmi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -38,7 +38,7 @@ const Squat = () => {
 
   // Use useEffect to trigger dispatch when session ends
   useEffect(() => {
-    const trackPushUps = async () => {
+    const trackSquats = async () => {
       if (finalCount < 5) {
         toast.error("Squat should be more than 5");
         return;
@@ -46,20 +46,21 @@ const Squat = () => {
       if (sessionEnded) {
         try {
           const res = await dispatch(
-            pushUpTracker({ userAddress: address, pushUpCount: finalCount })
+            squatTracker({ userAddress: address, squatCount: finalCount })
           );
           setCount(0);
           setSessionEnded(false);
           if (res.status === 200) {
-            navigate("/home");
+            navigate("/");
           }
         } catch (error) {
           console.error("Error tracking push-ups:", error);
+          toast.error("Error tracking squats. Please try again.");
         }
       }
     };
 
-    trackPushUps();
+    trackSquats();
   }, [sessionEnded, finalCount, dispatch]);
 
   return (
