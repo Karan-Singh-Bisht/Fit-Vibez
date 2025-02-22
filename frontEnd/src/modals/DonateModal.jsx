@@ -33,6 +33,7 @@ export default function LoginModal() {
       functionName: "donation",
       value: BigInt(ethers.parseEther(value.toString())),
     });
+    handleClose();
   };
 
   if (!open) return null;

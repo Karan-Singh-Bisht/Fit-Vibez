@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { useAccount, useWriteContract } from "wagmi";
 import { ABI } from "../ABI/abi";
 import { toast } from "sonner";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 const Challenge = () => {
+  const claimRef = useRef(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash === "#claim") {
+      const element = document.getElementById("claim");
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [location]);
+
   const { address, isConnected } = useAccount();
   const { data: hash, writeContract } = useWriteContract();
 
@@ -34,6 +46,7 @@ const Challenge = () => {
             <br /> Today
           </p>
           <button
+            id="claim"
             onClick={handleClaim}
             className="text-white mt-6 w-[10vw] text-md p-2 bg-[#F04658] opacity-80 rounded-full"
           >

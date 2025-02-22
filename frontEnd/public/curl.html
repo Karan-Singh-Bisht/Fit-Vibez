@@ -40,7 +40,7 @@
       .counter {
         font-size: 24px;
         font-weight: bold;
-        color: #007bff;
+        color: red;
         margin-top: 10px;
       }
 
@@ -99,9 +99,9 @@
 
     <p class="counter">Count: <span id="count">0</span></p>
 
-    <p id="finalMessage">
+    <!-- <p id="finalMessage">
       Session Ended. Final Count: <span id="finalCount"></span>
-    </p>
+    </p> -->
 
     <button class="button" id="startButton" onclick="startSession()">
       Start
@@ -141,7 +141,7 @@
 
         try {
           const response = await fetch(
-            "https://pushups-8vy9.onrender.com/process_frame/",
+            "https://pushup-poseestimation-2.onrender.com/process_frame/",
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -183,9 +183,12 @@
           stopButton.disabled = false;
 
           // Reset session in backend
-          await fetch("https://pushups-8vy9.onrender.com/reset_session/", {
-            method: "POST",
-          });
+          await fetch(
+            "https://pushup-poseestimation-2.onrender.com/reset_session/",
+            {
+              method: "POST",
+            }
+          );
           console.log("Session reset successfully");
         } catch (error) {
           console.error("Error starting session:", error);
