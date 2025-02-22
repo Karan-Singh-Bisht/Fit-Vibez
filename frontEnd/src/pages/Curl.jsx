@@ -68,7 +68,7 @@ const Curl = () => {
     <div style={{ width: "100%", height: "100vh", textAlign: "center" }}>
       {loading && (
         <p className="z-30">
-          <Loading />
+          <h1 className="text-xl">Loading Please Wait...</h1>
         </p>
       )}{" "}
       {/* ✅ Show loader while API call runs */}
