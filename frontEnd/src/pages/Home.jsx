@@ -36,7 +36,7 @@ const Home = () => {
         initial={{ y: -500, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="font-dynapuff mt-10 md:mt-[5vw] leading-none text-white text-center font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[4vw]"
+        className="font-Clash Display mt-10 md:mt-[5vw] leading-none text-white text-center font-bold text-3xl sm:text-4xl md:text-5xl lg:text-[4vw]"
       >
         Discover the Fitness
         <br />

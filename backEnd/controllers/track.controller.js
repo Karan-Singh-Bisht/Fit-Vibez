@@ -54,22 +54,14 @@ export const pushUpTracker = async (req, res) => {
 
   if (pushUpCount >= 5) {
     try {
-      console.log(
-        `🎯 User ${userAddress} completed ${pushUpCount} push-ups. Rewarding now...`
-      );
-
       // *Step 1: Mark goal as completed*
       const tx1 = await contract.setGoalComplete(userAddress);
       await tx1.wait();
-      console.log(`✅ Goal completion set for ${userAddress}: ${tx1.hash}`);
 
       // *Step 2: Assign reward*
       const rewardAmount = ethers.parseUnits("0.01", "ether"); // Correctly converts to 100000000000000 Wei
       const tx2 = await contract.setRewards(userAddress, rewardAmount);
       await tx2.wait();
-      console.log(
-        `✅ Reward set (${rewardAmount} ETH) for ${userAddress}: ${tx2.hash}`
-      );
 
       return res.json({
         status: 200,

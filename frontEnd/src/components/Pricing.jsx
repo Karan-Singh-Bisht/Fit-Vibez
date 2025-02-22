@@ -10,6 +10,7 @@ import { OrbitControls } from "@react-three/drei";
 import Model1 from "./Model1";
 import Model2 from "./Model2";
 import Model3 from "./Model3";
+import Model4 from "./Model4";
 
 const iconVariants = (duration) => ({
   initial: { y: -10 },
@@ -38,12 +39,13 @@ const Pricing = () => {
 
   const plans = [
     {
-      name: "Pushups",
+      name: "Push Ups",
+      price: 5599,
       value: 1,
       to: "/pushup",
       model: (
-        <Model1
-          position={[0, -2.7, 0]}
+        <Model4
+          position={[0, -1.4, 0]}
           scale={1.6}
           animationName="Armature|mixamo.com|Layer0"
         />
@@ -51,7 +53,7 @@ const Pricing = () => {
     },
     {
       name: "Squats",
-      // price: 5299,
+      price: 5299,
       value: 1.5,
       to: "/squat",
       model: (
@@ -64,7 +66,7 @@ const Pricing = () => {
     },
     {
       name: "Bicep Curls",
-      // price: 399,
+      price: 399,
       value: 2,
       to: "/curl",
       model: (
@@ -80,7 +82,7 @@ const Pricing = () => {
   ];
   return (
     <div>
-      <h1 className="font-dynapuff text-white mt-[2vw] text-[3vw] font-semibold text-center">
+      <h1 className="font-Clash Display text-white mt-[2vw] text-[3vw] font-bold text-center">
         Join the Fitness Challenge
       </h1>
       <h2 className="text-[#818180] mt-[1vw] font-inter text-center">

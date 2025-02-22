@@ -4,6 +4,7 @@ import { pushUpTracker, setFinalActivityCount } from "../state/Ai/AiSlice";
 import { useAccount } from "wagmi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import Loading from "../components/Loading";
 
 const Curl = () => {
   const dispatch = useDispatch();
@@ -65,7 +66,11 @@ const Curl = () => {
 
   return (
     <div style={{ width: "100%", height: "100vh", textAlign: "center" }}>
-      {loading && <p>Processing... Please wait</p>}{" "}
+      {loading && (
+        <p className="z-30">
+          <Loading />
+        </p>
+      )}{" "}
       {/* ✅ Show loader while API call runs */}
       <iframe
         src="/curl.html"
