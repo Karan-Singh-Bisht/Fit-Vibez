@@ -9,8 +9,8 @@ export const pushUpTracker = createAsyncThunk(
       const response = await axios.post(
         `${API_BASE_URL}/api/v1/track/pushups`,
         {
-          userAddress,
-          pushUpCount,
+          userAddress: userAddress,
+          pushUpCount: pushUpCount,
         }
       );
       return response.data; // ✅ Ensure response is returned properly

@@ -45,14 +45,14 @@ const contract = new ethers.Contract(
 
 export const pushUpTracker = async (req, res) => {
   const { userAddress, pushUpCount } = req.body;
-
+  console.log(req.body);
   if (!userAddress || pushUpCount === undefined) {
     return res
       .status(400)
       .json({ error: "User address and push-up count are required" });
   }
 
-  if (pushUpCount >= 10) {
+  if (pushUpCount >= 5) {
     try {
       console.log(
         `🎯 User ${userAddress} completed ${pushUpCount} push-ups. Rewarding now...`
@@ -71,7 +71,11 @@ export const pushUpTracker = async (req, res) => {
         `✅ Reward set (${rewardAmount} ETH) for ${userAddress}: ${tx2.hash}`
       );
 
-      return res.json({ success: true, txHashes: [tx1.hash, tx2.hash] });
+      return res.json({
+        status: 200,
+        success: true,
+        txHashes: [tx1.hash, tx2.hash],
+      });
     } catch (err) {
       console.error("❌ Error setting goal/reward:", err);
       return res.status(500).json({ error: err.message });
