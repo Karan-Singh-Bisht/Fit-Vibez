@@ -10,6 +10,7 @@ import {OrbitControls} from "@react-three/drei"
 import Model1 from "./Model1";
 import Model2 from "./Model2";
 import Model3 from "./Model3";
+import Model4 from "./Model4";
 
 
 const iconVariants = (duration) => ({
@@ -38,7 +39,7 @@ const Pricing = () => {
   };
 
   const plans = [
-    { name: "Jumping Jack", price: 5599, value: 1, to: "/pushup" , model: <Model1 position={[0,-2.7,0]} scale={1.6} animationName = "Armature|mixamo.com|Layer0"/> },
+    { name: "Push Ups", price: 5599, value: 1, to: "/pushup" , model: <Model4 position={[0,-1.4,0]} scale={1.6} animationName = "Armature|mixamo.com|Layer0"/> },
     { name: "Squats", price: 5299, value: 1.5, to: "/jumpingjack" , model: <Model2 position={[0,-2.7,0]} scale={1.6} animationName = "Armature|mixamo.com|Layer0"/>},
     { name: "Bicep Curls", price: 399, value: 2, to: "/pullups" , model: <Model3 position={[0,-2.7,0]} scale={1.6} animationName = "Armature|mixamo.com|Layer0"/> },
     // { name: "Fitnes: naumaný", price: 5399, value: 2.5 },
@@ -46,7 +47,7 @@ const Pricing = () => {
   ];
   return (
     <div>
-      <h1 className="font-dynapuff text-white mt-[2vw] text-[3vw] font-semibold text-center">
+      <h1 className="font-Clash Display text-white mt-[2vw] text-[3vw] font-bold text-center">
         Join the Fitness Challenge
       </h1>
       <h2 className="text-[#818180] mt-[1vw] font-inter text-center">
