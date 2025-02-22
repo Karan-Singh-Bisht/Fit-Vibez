@@ -1,8 +1,14 @@
 export const ABI = [
   {
     type: "constructor",
-    inputs: [],
-    stateMutability: "nonpayable",
+    inputs: [
+      {
+        name: "callback",
+        type: "address",
+        internalType: "address",
+      },
+    ],
+    stateMutability: "payable",
   },
   {
     type: "receive",
@@ -11,7 +17,13 @@ export const ABI = [
   {
     type: "function",
     name: "claim",
-    inputs: [],
+    inputs: [
+      {
+        name: "",
+        type: "address",
+        internalType: "address",
+      },
+    ],
     outputs: [],
     stateMutability: "nonpayable",
   },
@@ -33,6 +45,13 @@ export const ABI = [
       },
     ],
     stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "coverDebt",
+    inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
   },
   {
     type: "function",
@@ -94,21 +113,14 @@ export const ABI = [
   },
   {
     type: "function",
-    name: "owner",
-    inputs: [],
-    outputs: [
+    name: "pay",
+    inputs: [
       {
-        name: "",
-        type: "address",
-        internalType: "address",
+        name: "amount",
+        type: "uint256",
+        internalType: "uint256",
       },
     ],
-    stateMutability: "view",
-  },
-  {
-    type: "function",
-    name: "renounceOwnership",
-    inputs: [],
     outputs: [],
     stateMutability: "nonpayable",
   },
@@ -118,19 +130,6 @@ export const ABI = [
     inputs: [
       {
         name: "_user",
-        type: "address",
-        internalType: "address",
-      },
-    ],
-    outputs: [],
-    stateMutability: "nonpayable",
-  },
-  {
-    type: "function",
-    name: "setRewards",
-    inputs: [
-      {
-        name: "_to",
         type: "address",
         internalType: "address",
       },
@@ -155,19 +154,6 @@ export const ABI = [
       },
     ],
     stateMutability: "view",
-  },
-  {
-    type: "function",
-    name: "transferOwnership",
-    inputs: [
-      {
-        name: "newOwner",
-        type: "address",
-        internalType: "address",
-      },
-    ],
-    outputs: [],
-    stateMutability: "nonpayable",
   },
   {
     type: "event",
@@ -209,43 +195,21 @@ export const ABI = [
   },
   {
     type: "event",
-    name: "OwnershipTransferred",
+    name: "SetReward",
     inputs: [
       {
-        name: "previousOwner",
+        name: "user",
         type: "address",
         indexed: true,
         internalType: "address",
       },
       {
-        name: "newOwner",
-        type: "address",
+        name: "value",
+        type: "uint256",
         indexed: true,
-        internalType: "address",
+        internalType: "uint256",
       },
     ],
     anonymous: false,
-  },
-  {
-    type: "error",
-    name: "OwnableInvalidOwner",
-    inputs: [
-      {
-        name: "owner",
-        type: "address",
-        internalType: "address",
-      },
-    ],
-  },
-  {
-    type: "error",
-    name: "OwnableUnauthorizedAccount",
-    inputs: [
-      {
-        name: "account",
-        type: "address",
-        internalType: "address",
-      },
-    ],
   },
 ];

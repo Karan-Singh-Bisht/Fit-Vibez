@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { pushUpTracker, setFinalActivityCount } from "../state/Ai/AiSlice";
+import { curlTracker, setFinalActivityCount } from "../state/Ai/AiSlice";
 import { useAccount } from "wagmi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -36,7 +36,7 @@ const Curl = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    const trackPushUps = async () => {
+    const trackCurls = async () => {
       if (finalCount < 5) {
         toast.error("Curl should be more than 5");
         return;
@@ -45,33 +45,29 @@ const Curl = () => {
         setLoading(true); // ✅ Show loading state
         try {
           const res = await dispatch(
-            pushUpTracker({ userAddress: address, pushUpCount: finalCount })
+            curlTracker({ userAddress: address, curlCount: finalCount })
           );
           setCount(0);
           setSessionEnded(false);
           setLoading(false); // ✅ Hide loading state
 
           if (res.payload.status === 200) {
-            navigate("/#claim");
+            navigate("/");
           }
         } catch (error) {
           console.error("Error tracking push-ups:", error);
           setLoading(false); // ✅ Ensure loading stops on error
+          toast.error("Error tracking push-ups. Please try again.");
         }
       }
     };
 
-    trackPushUps();
+    trackCurls();
   }, [sessionEnded, finalCount, dispatch]);
 
   return (
     <div style={{ width: "100%", height: "100vh", textAlign: "center" }}>
-      {loading && (
-        <p className="z-30">
-          <h1 className="text-xl">Loading Please Wait...</h1>
-        </p>
-      )}{" "}
-      {/* ✅ Show loader while API call runs */}
+      {loading && <Loading />} {/* ✅ Show loader while API call runs */}
       <iframe
         src="/curl.html"
         width="100%"
