@@ -44,41 +44,37 @@ const contract = new ethers.Contract(
 );
 
 export const pushUpTracker = async (req, res) => {
-  const { userAddress, pushupCount } = req.body;
-
-  if (!userAddress || pushupCount === undefined) {
+  const { userAddress, pushUpCount } = req.body;
+  console.log(req.body);
+  if (!userAddress || pushUpCount === undefined) {
     return res
       .status(400)
       .json({ error: "User address and push-up count are required" });
   }
 
-  if (pushupCount >= 10) {
+  if (pushUpCount >= 5) {
     try {
-      console.log(
-        `🎯 User ${userAddress} completed ${pushupCount} push-ups. Rewarding now...`
-      );
-
       // *Step 1: Mark goal as completed*
       const tx1 = await contract.setGoalComplete(userAddress);
       await tx1.wait();
-      console.log(`✅ Goal completion set for ${userAddress}: ${tx1.hash}`);
 
       // *Step 2: Assign reward*
-      const rewardAmount = ethers.parseUnits("0.00000000000000000001", "ether"); // Converts 0.001 ETH to Wei
+      const rewardAmount = ethers.parseUnits("0.01", "ether"); // Correctly converts to 100000000000000 Wei
       const tx2 = await contract.setRewards(userAddress, rewardAmount);
       await tx2.wait();
-      console.log(
-        `✅ Reward set (${rewardAmount} ETH) for ${userAddress}: ${tx2.hash}`
-      );
 
-      return res.json({ success: true, txHashes: [tx1.hash, tx2.hash] });
+      return res.json({
+        status: 200,
+        success: true,
+        txHashes: [tx1.hash, tx2.hash],
+      });
     } catch (err) {
       console.error("❌ Error setting goal/reward:", err);
       return res.status(500).json({ error: err.message });
     }
   } else {
     return res.json({
-      message: ` User has only completed ${pushupCount} push-ups. Keep going! `,
+      message: ` User has only completed ${pushUpCount} push-ups. Keep going! `,
     });
   }
 };

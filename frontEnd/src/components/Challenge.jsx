@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { useAccount, useWriteContract } from "wagmi";
 import { ABI } from "../ABI/abi";
 import { toast } from "sonner";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 const Challenge = () => {
+  const claimRef = useRef(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash === "#claim") {
+      const element = document.getElementById("claim");
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [location]);
+
   const { address, isConnected } = useAccount();
   const { data: hash, writeContract } = useWriteContract();
 
@@ -24,7 +36,7 @@ const Challenge = () => {
     <div className="bg-[#1B1A1D] ">
       <div className="flex gap-[19vw] px-[10vw] pt-[8vw]">
         <div className="flex flex-col gap-4">
-          <h1 className="font-dynapuff text-[3vw] text-white font-bold">
+          <h1 className="font-Clash Display text-[3vw] text-white font-bold">
             Fitness
           </h1>
           <p className="text-md text-[#878587] tracking-[0.5px] leading-2xl">
@@ -34,6 +46,7 @@ const Challenge = () => {
             <br /> Today
           </p>
           <button
+            id="claim"
             onClick={handleClaim}
             className="text-white mt-6 w-[10vw] text-md p-2 bg-[#F04658] opacity-80 rounded-full"
           >
@@ -46,9 +59,10 @@ const Challenge = () => {
           transition={{ duration: 1 }}
         >
           <img
-            src="https://cdn-imgs.dora.run/design/CuiHA53WkTUFjspowIOIyE.webp/w/4096/h/4096/format/webp?"
+            src = "/imgNew.png"
+            // src="https://cdn-imgs.dora.run/design/CuiHA53WkTUFjspowIOIyE.webp/w/4096/h/4096/format/webp?"
             alt="women with weights"
-            className="w-[17vw] h-[30vw]"
+            className="w-[30vw] shadow-lg hover:shadow-gray-950 rounded-full h-[30vw]"
           />
         </motion.div>
       </div>
@@ -60,7 +74,7 @@ const Challenge = () => {
           transition={{ duration: 1, ease: "easeOut" }}
           className="w-[50%] px-[8vw] rounded-md flex flex-col gap-6 py-[6vw] bg-[#FAEFEC]"
         >
-          <h1 className="font-dynapuff text-4xl text-[#1C1A1C] font-bold">
+          <h1 className="font-Clash Display text-4xl text-[#1C1A1C] font-bold">
             Fitness <br></br>Challenges
           </h1>
           <p className="text-sm text-[#9D9492]">
@@ -90,7 +104,7 @@ const Challenge = () => {
           transition={{ duration: 1, ease: "easeOut" }}
           className="w-[50%] pr-[8vw] pl-[3vw] flex flex-col gap-6 pt-[8vw] pb-[6vw]"
         >
-          <h1 className="font-dynapuff text-4xl text-white font-bold">
+          <h1 className="font-Clash Display text-4xl text-white font-bold">
             Fitness <br></br>Challenges
           </h1>
           <p className="text-sm text-[#9D9492]">

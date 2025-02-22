@@ -5,12 +5,12 @@ import { useNavigate } from "react-router-dom";
 import GradientText from "./GradientText";
 import { useSelector } from "react-redux";
 import { toast } from "sonner";
-import {Canvas} from "@react-three/fiber"
-import {OrbitControls} from "@react-three/drei"
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
 import Model1 from "./Model1";
 import Model2 from "./Model2";
 import Model3 from "./Model3";
-
+import Model4 from "./Model4";
 
 const iconVariants = (duration) => ({
   initial: { y: -10 },
@@ -38,15 +38,51 @@ const Pricing = () => {
   };
 
   const plans = [
-    { name: "Jumping Jack", price: 5599, value: 1, to: "/pushup" , model: <Model1 position={[0,-2.7,0]} scale={1.6} animationName = "Armature|mixamo.com|Layer0"/> },
-    { name: "Squats", price: 5299, value: 1.5, to: "/jumpingjack" , model: <Model2 position={[0,-2.7,0]} scale={1.6} animationName = "Armature|mixamo.com|Layer0"/>},
-    { name: "Bicep Curls", price: 399, value: 2, to: "/pullups" , model: <Model3 position={[0,-2.7,0]} scale={1.6} animationName = "Armature|mixamo.com|Layer0"/> },
+    {
+      name: "Push Ups",
+      price: 5599,
+      value: 1,
+      to: "/pushup",
+      model: (
+        <Model4
+          position={[0, -1.4, 0]}
+          scale={1.6}
+          animationName="Armature|mixamo.com|Layer0"
+        />
+      ),
+    },
+    {
+      name: "Squats",
+      price: 5299,
+      value: 1.5,
+      to: "/squat",
+      model: (
+        <Model2
+          position={[0, -2.7, 0]}
+          scale={1.6}
+          animationName="Armature|mixamo.com|Layer0"
+        />
+      ),
+    },
+    {
+      name: "Bicep Curls",
+      price: 399,
+      value: 2,
+      to: "/curl",
+      model: (
+        <Model3
+          position={[0, -2.7, 0]}
+          scale={1.6}
+          animationName="Armature|mixamo.com|Layer0"
+        />
+      ),
+    },
     // { name: "Fitnes: naumaný", price: 5399, value: 2.5 },
     // { name: "SIOCCAIG", price: 5999, value: 3 },
   ];
   return (
     <div>
-      <h1 className="font-dynapuff text-white mt-[2vw] text-[3vw] font-semibold text-center">
+      <h1 className="font-Clash Display text-white mt-[2vw] text-[3vw] font-bold text-center">
         Join the Fitness Challenge
       </h1>
       <h2 className="text-[#818180] mt-[1vw] font-inter text-center">
@@ -81,10 +117,10 @@ const Pricing = () => {
                 <Canvas>
                   <ambientLight intensity={1} />
                   <directionalLight position={[3, 2, 1]} />
-                  
+
                   {plan.model}
 
-                  <OrbitControls 
+                  <OrbitControls
                     minPolarAngle={Math.PI / 2}
                     enableZoom={false}
                     maxPolarANgle={Math.PI / 2}
@@ -94,9 +130,9 @@ const Pricing = () => {
               <h2 className="text-white text-2xl font-bold mt-4">
                 {plan.name}
               </h2>
-              <p className="text-white text-4xl font-extrabold mt-2">
+              {/* <p className="text-white text-4xl font-extrabold mt-2">
                 ${plan.price}
-              </p>
+              </p> */}
               <button className="mt-4 bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-600 transition">
                 Get Started
               </button>
