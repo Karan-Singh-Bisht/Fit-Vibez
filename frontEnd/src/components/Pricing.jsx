@@ -96,7 +96,7 @@ const Pricing = () => {
           colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
           animationSpeed={3}
         >
-          <h1 onClick={() => handleNavigate("donate")}>Donate</h1>
+          <h1 onClick={() => handleNavigate("donate")} className="text-2xl">Donate</h1>
         </GradientText>
       </h2>
 
