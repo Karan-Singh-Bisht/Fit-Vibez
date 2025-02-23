@@ -17,7 +17,7 @@ https://fit-vibez-dmonkygpz-karan-singh-bishts-projects.vercel.app/
 ## Overview
 Fit Vibez is a blockchain-integrated fitness tracking platform that incentivizes users to complete physical activities like push-ups and squats by rewarding them with cryptocurrency. The platform leverages smart contracts to verify completed workouts and process reward transactions securely.
 
-https://github.com/user-attachments/assets/28a49f53-1eb5-4c99-ad4d-5f36619fc2ee
+
 
 ## Features
 - **Real-time Workout Tracking**: Tracks push-ups and squats in real-time through an interactive interface.
