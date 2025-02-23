@@ -51,17 +51,19 @@ const FitnessRewards = () => {
           whileInView={{ x: 0, opacity: 1 }}
           initial={{ x: 100, opacity: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="absolute top-[38vw] right-[8vw] w-72 md:w-[30vw] h-[13vw] bg-[#171717] p-6 md:p-10 rounded-2xl shadow-xl flex items-center justify-between space-x-4"
+          className="absolute top-[38vw] right-[8vw] w-72 md:w-[30vw] h-[13vw] bg-[#171717] rounded-3xl shadow-xl"
         >
-          <div className="flex flex-col space-y-2">
-            <span className="text-gray-400 text-lg font-semibold">
-              Start Earning
-            </span>
-          </div>
+          <SpotlightCard className="absolute inset-0 w-full h-full p-6 md:p-10 flex items-center justify-between space-x-4">
+            <div className="flex flex-col space-y-2">
+              <span className="text-gray-400 text-lg font-semibold">
+                Start Earning
+              </span>
+            </div>
 
-          <div className="w-16 h-16 md:w-20 md:h-20 bg-red-500 rounded-full flex items-center justify-center shadow-lg">
-            <span className="text-white text-3xl md:text-[3vw]">🏃‍♂️</span>
-          </div>
+            <div className="w-16 h-16 md:w-20 md:h-20 bg-red-500 rounded-full flex items-center justify-center shadow-lg">
+              <span className="text-white text-3xl md:text-[3vw]">🏃‍♂️</span>
+            </div>
+          </SpotlightCard>
         </motion.div>
       </div>
     </div>
