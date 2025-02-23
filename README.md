@@ -74,6 +74,12 @@ Similar to push-up tracking, but for squats.
 ## Deployment
 - **Smart Contract**: Ethereum Mainnet / Testnet
 
+## AI APIS LINK
+
+AI Curl Counter API => https://pushup-poseestimation-2.onrender.com/process_frame/
+AI Pushup Counter API => https://pushups-8vy9.onrender.com/process_frame/
+AI Squats Counter API => https://squatsposeestimation.onrender.com/process_frame/
+
 ## Future Enhancements
 - Adding leaderboards and social features.
 - Multi-chain support (Polygon, BSC, etc.).
