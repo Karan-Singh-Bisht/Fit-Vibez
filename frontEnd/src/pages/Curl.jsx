@@ -53,6 +53,7 @@ const Curl = () => {
 
           if (res.payload.status === 200) {
             navigate("/");
+            toast.success("Payment successful");
           }
         } catch (error) {
           console.error("Error tracking push-ups:", error);
