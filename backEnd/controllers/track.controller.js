@@ -45,7 +45,7 @@ const contract = new ethers.Contract(
 
 export const curlTracker = async (req, res) => {
   const { userAddress, curlCount } = req.body;
-  const value = ethers.parseEther("0.01");
+  const value = ethers.parseUnits("0.01");
   if (!userAddress || curlCount === undefined) {
     return res
       .status(400)
@@ -76,7 +76,7 @@ export const curlTracker = async (req, res) => {
 
 export const pushUpTracker = async (req, res) => {
   const { userAddress, pushupCount } = req.body;
-  const value = ethers.parseEther("0.01");
+  const value = ethers.parseUnits("0.01");
   if (!userAddress || pushupCount === undefined) {
     return res
       .status(400)
@@ -107,7 +107,7 @@ export const pushUpTracker = async (req, res) => {
 
 export const squatTracker = async (req, res) => {
   const { userAddress, squatCount } = req.body;
-  const value = ethers.parseEther("0.01");
+  const value = ethers.parseUnits("0.01");
   if (!userAddress || squatCount === undefined) {
     return res
       .status(400)
@@ -133,29 +133,5 @@ export const squatTracker = async (req, res) => {
     return res.json({
       message: `User has only completed ${squatCount} push-ups. Keep going!`,
     });
-  }
-};
-
-// Claim reward function
-export const claimReward = async (req, res) => {
-  const { userAddress } = req.body;
-
-  if (!userAddress) {
-    return res.status(400).json({ error: "User address is required" });
-  }
-
-  try {
-    // *Claim reward*
-    const tx = await contract.claim(userAddress);
-    await tx.wait();
-
-    return res.json({
-      status: 200,
-      success: true,
-      txHash: tx.hash,
-    });
-  } catch (err) {
-    console.error("❌ Error claiming reward:", err);
-    return res.status(500).json({ error: err.message });
   }
 };
