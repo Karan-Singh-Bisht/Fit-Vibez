@@ -88,4 +88,5 @@ AI Squats Counter API => https://squatsposeestimation.onrender.com/process_frame
 ## Conclusion
 Fit Vibez leverages blockchain to promote fitness by offering crypto rewards for workouts. It ensures transparency, security, and real-time tracking, making fitness more engaging and rewarding.
 
+For Specific backEnd and frontEnd docs please visit the specific branch.
 
