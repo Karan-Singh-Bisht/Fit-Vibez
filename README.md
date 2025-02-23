@@ -1,5 +1,15 @@
 # Fit Vibez Documentation
 
+## NOTE
+
+Refresh these APIs before testing
+
+## AI APIS LINK
+
+AI Curl Counter API => https://pushup-poseestimation-2.onrender.com/process_frame/
+AI Pushup Counter API => https://pushups-8vy9.onrender.com/process_frame/
+AI Squats Counter API => https://squatsposeestimation.onrender.com/process_frame/
+
 ## Overview
 Fit Vibez is a blockchain-integrated fitness tracking platform that incentivizes users to complete physical activities like push-ups and squats by rewarding them with cryptocurrency. The platform leverages smart contracts to verify completed workouts and process reward transactions securely.
 
@@ -73,12 +83,6 @@ Similar to push-up tracking, but for squats.
 
 ## Deployment
 - **Smart Contract**: Ethereum Mainnet / Testnet
-
-## AI APIS LINK
-
-AI Curl Counter API => https://pushup-poseestimation-2.onrender.com/process_frame/
-AI Pushup Counter API => https://pushups-8vy9.onrender.com/process_frame/
-AI Squats Counter API => https://squatsposeestimation.onrender.com/process_frame/
 
 ## Future Enhancements
 - Adding leaderboards and social features.
