@@ -70,7 +70,7 @@ const Pushup = () => {
 
   return (
     <div style={{ width: "100%", height: "100vh", textAlign: "center" }}>
-      {loading && <Loading />}{" "}
+      {loading && <Loading />}
       <iframe
         src="/pushup.html"
         width="100%"
