@@ -10,6 +10,10 @@ AI Curl Counter API => https://pushup-poseestimation-2.onrender.com/process_fram
 AI Pushup Counter API => https://pushups-8vy9.onrender.com/process_frame/
 AI Squats Counter API => https://squatsposeestimation.onrender.com/process_frame/
 
+## Live Link
+
+https://fit-vibez-dmonkygpz-karan-singh-bishts-projects.vercel.app/
+
 ## Overview
 Fit Vibez is a blockchain-integrated fitness tracking platform that incentivizes users to complete physical activities like push-ups and squats by rewarding them with cryptocurrency. The platform leverages smart contracts to verify completed workouts and process reward transactions securely.
 
