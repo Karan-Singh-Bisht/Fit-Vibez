@@ -23,7 +23,6 @@ https://github.com/user-attachments/assets/28a49f53-1eb5-4c99-ad4d-5f36619fc2ee
 - **Real-time Workout Tracking**: Tracks push-ups and squats in real-time through an interactive interface.
 - **Blockchain Rewards**: Users completing workout goals receive 0.01 ETH as a reward.
 - **Decentralized Storage**: Uses smart contracts for secure and transparent transactions.
-- **User Authentication**: Connects with wallets using Wagmi and Web3 authentication.
 - **Redux Integration**: Manages activity data and user progress efficiently.
 
 ## Technology Stack
