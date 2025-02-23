@@ -4,12 +4,14 @@ import { pushUpTracker, setFinalActivityCount } from "../state/Ai/AiSlice";
 import { useAccount } from "wagmi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import Loading from "../components/Loading";
 
 const Pushup = () => {
   const dispatch = useDispatch();
   const [count, setCount] = useState(0);
   const [finalCount, setFinalCount] = useState(0);
   const [sessionEnded, setSessionEnded] = useState(false); // Track session state
+  const [loading, setLoading] = useState(false); // Loading state
   const { address } = useAccount();
   const navigate = useNavigate();
 
@@ -44,6 +46,7 @@ const Pushup = () => {
         return;
       }
       if (sessionEnded) {
+        setLoading(true);
         try {
           const res = await dispatch(
             pushUpTracker({ userAddress: address, pushUpCount: finalCount })
@@ -56,15 +59,18 @@ const Pushup = () => {
         } catch (error) {
           console.error("Error tracking push-ups:", error);
           toast.error("Error tracking push-ups. Please try again.");
+        } finally {
+          setLoading(false);
         }
       }
     };
 
     trackPushUps();
-  }, [sessionEnded, finalCount, dispatch]);
+  }, [sessionEnded, finalCount, dispatch, address, navigate]);
 
   return (
     <div style={{ width: "100%", height: "100vh", textAlign: "center" }}>
+      {loading && <Loading />}{" "}
       <iframe
         src="/pushup.html"
         width="100%"

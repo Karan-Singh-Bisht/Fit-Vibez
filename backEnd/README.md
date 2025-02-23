@@ -210,7 +210,6 @@ This documentation provides an overview of the API endpoints for tracking user a
   - [Track Curls](#1-track-curls)
   - [Track Push-ups](#2-track-push-ups)
   - [Track Squats](#3-track-squats)
-  - [Claim Reward](#4-claim-reward)
 - [Environment Variables](#environment-variables)
 - [Running the Application](#running-the-application)
 - [License](#license)

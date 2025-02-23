@@ -10,6 +10,7 @@ const Squat = () => {
   const [count, setCount] = useState(0);
   const [finalCount, setFinalCount] = useState(0);
   const [sessionEnded, setSessionEnded] = useState(false); // Track session state
+  const [loading, setLoading] = useState(false); // Track loading state
   const { address } = useAccount();
   const navigate = useNavigate();
 
@@ -44,6 +45,7 @@ const Squat = () => {
         return;
       }
       if (sessionEnded) {
+        setLoading(true);
         try {
           const res = await dispatch(
             squatTracker({ userAddress: address, squatCount: finalCount })
@@ -54,8 +56,10 @@ const Squat = () => {
             navigate("/");
           }
         } catch (error) {
-          console.error("Error tracking push-ups:", error);
+          console.error("Error tracking squats:", error);
           toast.error("Error tracking squats. Please try again.");
+        } finally {
+          setLoading(false);
         }
       }
     };
@@ -65,13 +69,17 @@ const Squat = () => {
 
   return (
     <div style={{ width: "100%", height: "100vh", textAlign: "center" }}>
-      <iframe
-        src="/squat.html"
-        width="100%"
-        height="80%"
-        title="Squat Page"
-        style={{ border: "none" }}
-      />
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <iframe
+          src="/squat.html"
+          width="100%"
+          height="80%"
+          title="Squat Page"
+          style={{ border: "none" }}
+        />
+      )}
     </div>
   );
 };
